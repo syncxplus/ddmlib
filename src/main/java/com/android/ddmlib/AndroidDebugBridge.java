@@ -60,6 +60,7 @@ public final class AndroidDebugBridge {
 
     private static final String ADB = "adb"; //$NON-NLS-1$
     private static final String DDMS = "ddms"; //$NON-NLS-1$
+    private static final String SERVER_HOST_ENV_VAR = "ANDROID_ADB_SERVER_HOST";
     private static final String SERVER_PORT_ENV_VAR = "ANDROID_ADB_SERVER_PORT"; //$NON-NLS-1$
 
     // Where to find the ADB bridge.
@@ -1040,7 +1041,7 @@ public final class AndroidDebugBridge {
     private static void initAdbSocketAddr() {
         try {
             sAdbServerPort = getAdbServerPort();
-            sHostAddr = InetAddress.getByName(DEFAULT_ADB_HOST);
+            sHostAddr = InetAddress.getByName(getAdbServerHost());
             sSocketAddr = new InetSocketAddress(sHostAddr, sAdbServerPort);
         } catch (UnknownHostException e) {
             // localhost should always be known.
@@ -1100,6 +1101,11 @@ public final class AndroidDebugBridge {
 
         // use default port if neither are set
         return DEFAULT_ADB_PORT;
+    }
+
+    private static String getAdbServerHost() {
+        String host = System.getenv(SERVER_HOST_ENV_VAR);
+        return host == null ? DEFAULT_ADB_HOST : host;
     }
 
     /**
