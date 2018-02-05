@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
  * <p>This currently uses spin-wait non-blocking I/O. A Selector would be more efficient,
  * but seems like overkill for what we're doing here.
  */
-final class AdbHelper {
+public final class AdbHelper {
 
     // public static final long kOkay = 0x59414b4fL;
     // public static final long kFail = 0x4c494146L;
@@ -710,7 +710,7 @@ final class AdbHelper {
     /**
      * Converts an ADB reply to a string.
      */
-    static String replyToString(byte[] reply) {
+    public static String replyToString(byte[] reply) {
         String result;
         try {
             result = new String(reply, DEFAULT_ENCODING);
