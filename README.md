@@ -1,0 +1,4 @@
+# Usage
+```
+gradle clean jar
+```

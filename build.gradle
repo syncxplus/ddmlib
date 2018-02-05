@@ -1,0 +1,25 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'java'
+
+jar {
+    baseName = 'ddmlib'
+    version = '25.3.3.Syncxplus'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile (
+            'com.android.tools:common:25.3.3',
+            'net.sf.kxml:kxml2:2.3.0'
+    )
+}

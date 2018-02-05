@@ -43,7 +43,7 @@ final class AdbHelper {
 
     static final int WAIT_TIME = 5; // spin-wait sleep, in ms
 
-    static final String DEFAULT_ENCODING = "ISO-8859-1"; //$NON-NLS-1$
+    public static final String DEFAULT_ENCODING = "UTF-8"; //$NON-NLS-1$
 
     /** do not instantiate */
     private AdbHelper() {
@@ -192,9 +192,9 @@ final class AdbHelper {
      * doesn't matter).
      */
     public static byte[] formAdbRequest(String req) {
-        String resultStr = String.format("%04X%s", req.length(), req); //$NON-NLS-1$
         byte[] result;
         try {
+            String resultStr = String.format("%04X%s", req.getBytes(DEFAULT_ENCODING).length, req); //$NON-NLS-1$
             result = resultStr.getBytes(DEFAULT_ENCODING);
         } catch (UnsupportedEncodingException uee) {
             uee.printStackTrace(); // not expected
